@@ -52,7 +52,7 @@ export class AssetGenerator extends ToolCall {
     const pngBuffer = await sharp(imageBuffer).png().toBuffer();
 
     return {
-      message: "A base image has been generated",
+      message: "A base image has been generated.",
       content: {
         base64: pngBuffer.toString("base64"),
         format: "image/png",
