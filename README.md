@@ -10,11 +10,6 @@ This is a TypeScript-based MCP server that implements a simple notes system. It 
 
 ## Features
 
-### Resources
-- List and access notes via `note://` URIs
-- Each note has a title, content and metadata
-- Plain text mime type for simple content access
-
 ### Tools
 - `generate_image` - Create new image asset
   - Will make images, banners, logos, icons and svgs
