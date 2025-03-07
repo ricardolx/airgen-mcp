@@ -2,6 +2,7 @@ import { ChatCompletionTool } from "openai/resources/index";
 import { ToolCall } from "../tools";
 import { getOpenAIClient } from "../../openai/openai";
 import { designerPrompt } from "../prompts/designer";
+import sharp from "sharp";
 
 export const generateAssetTool: ChatCompletionTool = {
   type: "function",
@@ -46,11 +47,15 @@ export class AssetGenerator extends ToolCall {
       size: this.size as any,
     });
 
+    const imageBuffer = Buffer.from(response.data[0].b64_json ?? "", "base64");
+
+    const pngBuffer = await sharp(imageBuffer).png().toBuffer();
+
     return {
       message: "A base image has been generated",
       content: {
-        base64: response.data[0].b64_json,
-        format: "image/webp",
+        base64: pngBuffer.toString("base64"),
+        format: "image/png",
       },
     };
   };

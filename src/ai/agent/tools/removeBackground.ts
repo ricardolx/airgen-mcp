@@ -31,7 +31,7 @@ export class RemoveBackgroundTool extends ToolCall {
   performCall = async () => {
     console.log("[ REMOVE BACKGROUND ]", this.imageBase64.substring(0, 10));
 
-    let base64Data = this.imageBase64;
+    const base64Data = this.imageBase64;
 
     const imageBuffer = Buffer.from(base64Data, "base64");
 
