@@ -34,5 +34,6 @@ module.exports = {
     "require-jsdoc": 0,
     indent: 0,
     "new-cap": 0,
+    "valid-jsdoc": 0,
   },
 };
