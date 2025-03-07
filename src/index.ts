@@ -40,7 +40,6 @@ server.tool("generate_image", { prompt: z.string() }, async ({ prompt }) => {
   console.log("generate_image", prompt);
   const result = await invokeAgent(prompt);
 
-  console.log("[ Result ]", result);
   return {
     content: [
       {
