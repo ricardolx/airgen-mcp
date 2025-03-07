@@ -2,11 +2,7 @@
 
 Generate assets, icons, and svgs
 
-This is a TypeScript-based MCP server that implements a simple notes system. It demonstrates core MCP concepts by providing:
-
-- Resources representing text notes with URIs and metadata
-- Tools for creating new notes
-- Prompts for generating summaries of notes
+This is a TypeScript-based MCP server that implements an asset generation agent. It uses core MCP concepts by providing: A tool for generating assets
 
 ## Features
 
