@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('lib/index.js', '755')\"",
-    "server": "tsc && node lib/index.js",
+    "server": "tsc && node lib/index.js & tsc --watch",
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector lib/index.js"
