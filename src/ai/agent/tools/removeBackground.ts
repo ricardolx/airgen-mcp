@@ -35,11 +35,8 @@ export class RemoveBackgroundTool extends ToolCall {
 
     const imageBuffer = Buffer.from(base64Data, "base64");
 
-    const pngBuffer = await sharp(imageBuffer).png().toBuffer();
-    const blob = new Blob([pngBuffer], { type: "image/png" });
-
     // Remove background
-    const resultBlob = await removeBackground(blob);
+    const resultBlob = await removeBackground(imageBuffer);
 
     // Result is a blob, convert to base64
     const resultArrayBuffer = await resultBlob.arrayBuffer();
