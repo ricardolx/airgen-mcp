@@ -32,5 +32,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "arrow-parens": 0,
     "require-jsdoc": 0,
+    indent: 0,
+    "new-cap": 0,
   },
 };
