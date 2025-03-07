@@ -1,0 +1,30 @@
+{
+  "name": "airgen-mcp",
+  "version": "0.1.0",
+  "description": "Generate assets, icons, and svgs",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "airgen-mcp": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "server": "tsc && node build/index.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "express": "^4.21.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.17.23",
+    "typescript": "^5.3.3"
+  }
+}
