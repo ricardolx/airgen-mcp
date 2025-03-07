@@ -31,9 +31,9 @@ Build the server:
 npm run build
 ```
 
-For development with auto-rebuild:
+Run the server
 ```bash
-npm run watch
+npm run server
 ```
 
 ## Installation
