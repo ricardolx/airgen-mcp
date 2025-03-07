@@ -2,3 +2,9 @@ node_modules/
 build/
 *.log
 .env*
+lib/
+.env
+.env.development
+.env.production
+.env.test
+.env.local
