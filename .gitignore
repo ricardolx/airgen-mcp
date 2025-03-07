@@ -8,3 +8,5 @@ lib/
 .env.production
 .env.test
 .env.local
+
+llms-full.txt
