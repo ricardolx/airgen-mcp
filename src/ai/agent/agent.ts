@@ -3,16 +3,19 @@ import { getOpenAIClient, OpenAIModels } from "../openai/openai";
 import { agentPrompt } from "./prompts/agent";
 import { ToolCall } from "./tools";
 import { AssetGenerator, generateAssetTool } from "./tools/generateAsset";
-import {
-  RemoveBackgroundTool,
-  removeBackgroundTool,
-} from "./tools/removeBackground";
-import {
-  ConvertToVectorTool,
-  convertToVectorTool,
-} from "./tools/convertToVector";
+import { RemoveBackgroundTool, removeBackgroundTool } from "./tools/removeBackground";
+import { ConvertToVectorTool, convertToVectorTool } from "./tools/convertToVector";
 import { ChatCompletionMessage } from "openai/src/resources/index.js";
 import { ResizeImageTool, resizeImageTool } from "./tools/resizeImage";
+
+export const AssetAgentTools: {
+  [key: string]: new (...args: any[]) => ToolCall;
+} = {
+  [AssetGenerator.tool_name]: AssetGenerator,
+  [ResizeImageTool.tool_name]: ResizeImageTool,
+  [RemoveBackgroundTool.tool_name]: RemoveBackgroundTool,
+  [ConvertToVectorTool.tool_name]: ConvertToVectorTool,
+};
 
 export const invokeAgent = async (prompt: string) => {
   const messages: Array<ChatCompletionMessageParam> = [
@@ -20,10 +23,17 @@ export const invokeAgent = async (prompt: string) => {
     { role: "user", content: prompt },
   ];
 
-  return await handleAgent(messages);
+  return await agentLoop(messages);
 };
 
-export const handleAgent = async (
+/**
+ * Main agent loop
+ * @param messages - The messages to pass to the agent
+ * @param base64 - The base64 encoded image to pass to the agent
+ * @param format - The format of the image to pass to the agent
+ * @returns The base64 encoded image and the format of the image
+ */
+export const agentLoop = async (
   messages: Array<ChatCompletionMessageParam>,
   base64?: string,
   format?: string
@@ -41,26 +51,10 @@ export const handleAgent = async (
       const toolName = tool.function.name;
       console.log("[ Tool ] 🔨 - ", toolName);
 
-      if (tool.function.name === AssetGenerator.tool_name && !base64) {
+      const ToolClass = AssetAgentTools[toolName];
+      if (ToolClass) {
         const args = JSON.parse(tool.function.arguments);
-        toolCall = new AssetGenerator(args.prompt, args.size);
-      } else if (tool.function.name === resizeImageTool.function.name) {
-        const args = JSON.parse(tool.function.arguments);
-        toolCall = new ResizeImageTool(
-          args.imageBase64,
-          args.width,
-          args.height
-        );
-      } else if (
-        tool.function.name === RemoveBackgroundTool.tool_name &&
-        base64
-      ) {
-        toolCall = new RemoveBackgroundTool(base64);
-      } else if (
-        tool.function.name === ConvertToVectorTool.tool_name &&
-        base64
-      ) {
-        toolCall = new ConvertToVectorTool(base64);
+        toolCall = new ToolClass(...args);
       } else {
         messages.push({
           role: "tool",
@@ -81,7 +75,7 @@ export const handleAgent = async (
         tool_call_id: tool.id,
       });
     }
-    return await handleAgent(messages, base64, format);
+    return await agentLoop(messages, base64, format);
   }
   return { base64: base64 || "", format: format || "" };
 };
