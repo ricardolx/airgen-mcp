@@ -1,4 +1,4 @@
-# airgen-mcp MCP Server
+![image](https://github.com/user-attachments/assets/95eacfca-feee-4719-83e0-f67e7b5890b5)# airgen-mcp MCP Server
 
 Generate assets, icons, and svgs
 
@@ -41,3 +41,8 @@ To use with Cursor `mcp.json`
 }
 ```
 
+### Coming soon
+
+#### Authorization
+
+MCP is proposed to suport OAuth 2.1 (https://spec.modelcontextprotocol.io/specification/draft/basic/authorization/)
