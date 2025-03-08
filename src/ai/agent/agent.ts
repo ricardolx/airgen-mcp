@@ -12,6 +12,7 @@ import {
   convertToVectorTool,
 } from "./tools/convertToVector";
 import { ChatCompletionMessage } from "openai/src/resources/index.js";
+import { ResizeImageTool, resizeImageTool } from "./tools/resizeImage";
 
 export const invokeAgent = async (prompt: string) => {
   const messages: Array<ChatCompletionMessageParam> = [
@@ -43,6 +44,13 @@ export const handleAgent = async (
       if (tool.function.name === AssetGenerator.tool_name && !base64) {
         const args = JSON.parse(tool.function.arguments);
         toolCall = new AssetGenerator(args.prompt, args.size);
+      } else if (tool.function.name === resizeImageTool.function.name) {
+        const args = JSON.parse(tool.function.arguments);
+        toolCall = new ResizeImageTool(
+          args.imageBase64,
+          args.width,
+          args.height
+        );
       } else if (
         tool.function.name === RemoveBackgroundTool.tool_name &&
         base64
@@ -87,7 +95,12 @@ export const callLlm = async (
   const response = await openAIClient.chat.completions.create({
     model: OpenAIModels.GPT_4o_MINI,
     messages,
-    tools: [generateAssetTool, removeBackgroundTool, convertToVectorTool],
+    tools: [
+      generateAssetTool,
+      resizeImageTool,
+      removeBackgroundTool,
+      convertToVectorTool,
+    ],
   });
 
   console.log("[ Response Usage ]", response.usage?.total_tokens);

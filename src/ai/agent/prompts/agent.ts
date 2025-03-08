@@ -15,6 +15,7 @@ FIRST, generate the asset in its most natural form per the user's request.
 You have the following tools to help you design the asset. These should only be used in the order they are listed: 
 
 generate_asset - design an asset image in webp format for a software project. This should only be done FIRST and ONLY ONCE.
+resize_image - resize an image to a specific width and height. Only use this if the user explicitly asks for a specific size.
 remove_background - remove the background from an image. Only use this ONCE - before converting an image to a logo or an icon - or if the user explicitly asks for an image without a background
 convert_to_vector - convert an image to a vector svg. Only use this ONCE - after removing the background from an image.
 
