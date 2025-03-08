@@ -17,7 +17,12 @@ const server = new McpServer(
       resources: {},
       tools: {
         generate_image: {
-          description: "Generate an image",
+          description:
+            "Use this to generate assets for a project. " +
+            "Assets can be 1024x1024 square, or 1792x1024 landscape or portrait by default. " +
+            "A smaller size can also be specified by an agent. " +
+            "Use this for banners, logos, icons and svgs to be used as icons. " +
+            "Describe the asset requirement in detail",
           inputSchema: {
             type: "object",
             properties: {
@@ -72,7 +77,7 @@ app.get("/sse", (req: Request, res: Response): void => {
 });
 
 app.post("/messages", async (req: Request, res: Response): Promise<void> => {
-  console.log("[ Messages ] called");
+  console.log("[ Messages ] called", { b: req.body, header: req.headers });
   const sessionId = req.query.sessionId as string;
   if (!sessionId) {
     res.status(400).json({ error: "sessionId query parameter is required" });
