@@ -77,7 +77,7 @@ app.get("/sse", (req: Request, res: Response): void => {
 });
 
 app.post("/messages", async (req: Request, res: Response): Promise<void> => {
-  console.log("[ Messages ] called", { b: req.body, header: req.headers });
+  console.log("[ Messages ] called");
   const sessionId = req.query.sessionId as string;
   if (!sessionId) {
     res.status(400).json({ error: "sessionId query parameter is required" });
