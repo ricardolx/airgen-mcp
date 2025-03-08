@@ -1,6 +1,5 @@
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 
-// Secret names in GCP Secret Manager
 const SECRETS = {
   OPENAI_API_KEY:
     "projects/your-project/secrets/openai-api-key/versions/latest",

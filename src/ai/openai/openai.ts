@@ -1,4 +1,3 @@
-// import { defineSecret } from "firebase-functions/params";
 import OpenAI from "openai";
 import { getSecret } from "../../config/env";
 
