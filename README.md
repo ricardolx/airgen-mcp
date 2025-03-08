@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/95eacfca-feee-4719-83e0-f67e7b5890b5)# airgen-mcp MCP Server
+# Airgen MCP Server
 
 Generate assets, icons, and svgs
 
