@@ -8,7 +8,7 @@ This is a TypeScript-based MCP server that implements an asset generation agent.
 - Removing image backgrounds
 - Resizing images
 - Converting assets to vectors or SVGs
-- 
+  
 ## Features
 
 ### Tools
