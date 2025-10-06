@@ -2,7 +2,7 @@
 
 Generate assets, icons, and svgs
 
-This is a TypeScript-based MCP server that implements an asset generation agent. It uses core MCP concepts by providing tools for: 
+This is a TypeScript-based MCP server that implements an asset generation agent. It uses core MCP concepts by providing an AI agent with tools for: 
 
 - Generating image assets given a provided description
 - Removing image backgrounds
@@ -11,9 +11,9 @@ This is a TypeScript-based MCP server that implements an asset generation agent.
   
 ## Features
 
-### Tools
+### MCP Tools
 - `generate_image` - Create new image asset
-  - Will make images, banners, logos, icons and svgs
+  - Will make images, banners, logos, icons and svgs using the agent toolset
 
 ## Development
 
